@@ -73,7 +73,7 @@ spec:
       - name: aqua-demo
       containers:
       - name: wp-server
-        image: aquademo.azurecr.io/wordpress:plugins
+        image: dstubked/wordpress:plugins
         env:
         - name: "WORDPRESS_DB_HOST"
           value: "wp-db"
