@@ -33,7 +33,7 @@ spec:
         app: go-docker
     spec:
       containers:
-      - name: wp-server
+      - name: go-docker
         image: dstubked/go-docker:1
         ports:
           - containerPort: 8081
