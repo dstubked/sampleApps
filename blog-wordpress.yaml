@@ -74,8 +74,6 @@ spec:
       labels:
         app: wp-server
     spec:
-      imagePullSecrets:
-      - name: aqua-demo
       containers:
       - name: wp-server
         image: dstubked/wordpress:plugins
