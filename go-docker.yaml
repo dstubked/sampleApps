@@ -35,5 +35,8 @@ spec:
       containers:
       - name: go-docker
         image: dstubked/go-docker:1
+        env:
+        - name: "AQUA_PROFILE"
+          value: "true"
         ports:
           - containerPort: 8081
