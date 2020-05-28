@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: aqua-ubuntu
-        image: ubuntu:latest
+        image: dstubked/ubuntu:latest
         env:
           - name: TEST_A
             value: "TEST_A_Value"
