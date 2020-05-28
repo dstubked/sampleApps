@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aqua-privileged-ubuntu-deployment
+spec:
+  selector:
+    matchLabels:
+      app: aqua-privileged-ubuntu
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aqua-privileged-ubuntu
+    spec:
+      containers:
+      - name: aqua-ubuntu
+        image: ubuntu:non-compliant
+        securityContext:
+          privileged: true
+        env:
+          - name: TEST_A
+            value: "TEST_A_Value"
+          - name: TEST_B
+            value: "TEST_B_Value"
+          - name: AQUA_PROFILE
+            value: "true"
+        command:
+          - sleep
+          - infinity
+        volumeMounts:
+          - name: var-tmp
+            mountPath: /var/tmp
+      volumes:
+      - name: var-tmp
+        hostPath:
+          path: /var/tmp
