@@ -14,6 +14,15 @@ spec:
     spec:
       containers:
       - name: aqua-nginx
-        image: nginx:latest
+        image: nginx:1.7.1
+        env:
+          - name: TEST_A
+            value: "TEST_A_Value"
+          - name: TEST_B
+            value: "TEST_B_Value"
+          - name: MYSQL_PASS
+            value: "{aqua.mysql.pass}"
+          - name: AQUA_PROFILE
+            value: "true"
         ports:
         - containerPort: 80
