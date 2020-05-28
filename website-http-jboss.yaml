@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: website
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-server
+  namespace: website
+  labels:
+    app: web-server
+spec:
+  ports:
+    - port: 8000
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: web-server
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-server
+  namespace: website
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+       app: app-server
+  template:
+    metadata:
+      labels:
+        app: app-server
+    spec:
+      containers:
+      - name: app-server
+        image: jboss/wildfly:10.0.0.Final
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+  namespace: website
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+       app: web-server
+  template:
+    metadata:
+      labels:
+        app: web-server
+    spec:
+      containers:
+      - name: app-server
+        image: httpd:2.4.28
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 80
